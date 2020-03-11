@@ -1,12 +1,11 @@
 public class MaxHeap implements Heap {
-    int capacity;
     int size;
 
     Integer[] data;
 
-    public MaxHeap(int size) {
-        this.size = size;
-        data = new Integer[size];
+    public MaxHeap(int capacity) {
+        data = new Integer[capacity];
+        size = 0;
     }
 
     // build a heap based on data
