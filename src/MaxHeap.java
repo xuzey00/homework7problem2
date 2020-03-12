@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.PriorityQueue;
+import java.lang.Math;
 
 public class MaxHeap implements Heap {
     int size;
@@ -26,6 +27,23 @@ public class MaxHeap implements Heap {
     public void MaxHeapN(Integer[] data) {
         // homework
 
+    }
+
+    public int parent(int pos){
+        return pos/2;
+    }
+
+    public void swap(int f, int s){
+        int temp = data[f];
+        data[f] = data[s];
+        data[s] = temp;
+    }
+
+    public void heapifyUp(int n){
+        if(n != 1 && data[n] < data[parent(n)]){
+            swap(n, parent(n));
+            heapifyUp(parent(n));
+        }
     }
 
     // add an item to the heap
@@ -61,7 +79,8 @@ public class MaxHeap implements Heap {
         Integer[] data = new Integer[testSize];
         MaxHeap heap = new MaxHeap(testSize);
         for(int i = 0; i<data.length;i++){
-            data[i]=i;
+            int rm = (int) (Math.random()*((10-1)+1))+1;
+            data[i]= rm;
         }
         System.out.println(Arrays.toString(data));
         //System.out.println(heap.MaxHeapLogN(data)); to check the result
