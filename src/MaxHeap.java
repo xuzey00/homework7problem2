@@ -59,7 +59,7 @@ public class MaxHeap implements Heap {
     }
 
     private int parent(int pos){
-        return pos/2;
+        return (pos-1)/2;
     }
 
     private void swap(int f, int s){
@@ -140,23 +140,36 @@ public class MaxHeap implements Heap {
     //for test
     public static void main(String[] args) {
         int testSize = 8;
+
         Integer[] data = new Integer[testSize];
         MaxHeap heap = new MaxHeap(testSize);
-        Random rand = new Random();
+
+        MaxHeap newHeap = new MaxHeap(testSize);
+        Integer[] data2 = new Integer[testSize];
+
         for(int i = 0; i< data.length;i++){
-            int rm = (int) (Math.random()*((10-1)+1))+1;
+            int rm = (int) (Math.random()*((20-1)+1))+1;
             //int rm = (rand.nextInt(1000)%10);
             data[i] = rm;
         }
+
+        for(int i = 0; i< data2.length;i++){
+            int rm2 = (int) (Math.random()*((20-1)+1))+1;
+            data2[i] = rm2;
+        }
+
         //System.out.println(Arrays.toString(data));
         heap.MaxHeapLogN(data);
+        System.out.println("result for MaxLogN:");
         heap.print();
         int get = heap.get();
         System.out.println("\n\nget(): "+get+"\n");
         heap.pop();
         System.out.println("after pop():");
         heap.print();
-        //heap.MaxHeapN(data);
-        //heap.print();
+        System.out.println();
+        System.out.println("\n result of MaxN:");
+        newHeap.MaxHeapN(data2);
+        newHeap.print();
     }
 }
