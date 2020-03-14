@@ -15,11 +15,13 @@ public class MaxHeap implements Heap {
     // to be implemented in O(nlogn)
     public void MaxHeapLogN(Integer[] inputArray) {
         // homework
+        System.out.println("Max heap build O(nlogn)");
         if(inputArray.length == 0){
             return;
         }
         for (Integer datum : inputArray) {
             add(datum);
+            print();
             //System.out.println(Arrays.toString(data));
         }
     }
@@ -28,27 +30,22 @@ public class MaxHeap implements Heap {
     // to be implemented in O(n)
     public void MaxHeapN(Integer[] inputArray) {
         // homework
-
-        for(int i = (int)Math.floor( inputArray.length - 1 ); i >= 0; i--){
-            maxHeapify(inputArray, i);
+        System.out.println("Max heap build O(n)");
+        if(inputArray.length == 0){
+            return;
         }
 
-    }
+        for (int i = 0; i < inputArray.length; i++) {
+            data[i] = inputArray[i];
+        }
 
-    private void maxHeapify(Integer[] inputArray, int n){
-        int largest = n;
-        int right = rightChild(n);
-        int left = leftChild(n);
-        if(left < inputArray.length && inputArray[left] > inputArray[largest]){
-            largest = left;
+        size = inputArray.length;
+        for (int i = size/2; i >= 0; i--)
+        {
+            heapifyDown(i);
+            System.out.println("data: " +Arrays.toString(data));
         }
-        if(right < inputArray.length && inputArray[right] > inputArray[largest]){
-            largest = right;
-        }
-        if(largest != n){
-            swap(n,largest);
-            maxHeapify(inputArray, largest);
-        }
+
     }
 
     private int rightChild(int pos){
@@ -81,20 +78,21 @@ public class MaxHeap implements Heap {
         }
     }
 
-    private void heapifyDown(Integer[] arr, int n){
-        int smallest = n;
-        int l = leftChild(n);
-        int r = rightChild(n);
-        System.out.println("smallest:"+smallest+" l:"+l+" r:"+r);
-        if(l <= n && data[l] < data[smallest]){
-            smallest = l;
+    private void heapifyDown(int n){
+        int largest = n;
+        int left = leftChild(n);
+        int right = rightChild(n);
+
+        if ((left < size) && (data[left] > data[largest])) {
+            largest = left;
         }
-        if(r <= n && data[r] < data[smallest]){
-            smallest = r;
+        if ((right < size) && (data[right] > data[largest])) {
+            largest = right;
         }
-        if(smallest != n){
-            swap(smallest,n);
-            heapifyDown(data, smallest);
+
+        if(largest != n) {
+            swap(largest,n);
+            heapifyDown(largest);
         }
     }
 
@@ -133,66 +131,76 @@ public class MaxHeap implements Heap {
         int temp = data[0];
         data[0] = data[size-1];
         size--;
-        heapifyDown(data, size);
-        System.out.println("popped: "+temp);
-        System.out.println(Arrays.toString(data));
+        heapifyDown(0);
+        //System.out.println("popped: "+temp);
+        //System.out.println(Arrays.toString(data));
         return temp;
     }
 
     public void print()
     {
         System.out.println("Heap =");
-        for (Integer datum : data) {
-            System.out.print(datum + " ");
+        if(size == 0) {
+            System.out.print("null\n ");
         }
+        for(int i = 0; i<size;i++){
+            System.out.print(" "+ data[i]);
+        }
+        System.out.print("\n");
     }
 
     //for test
     public static void main(String[] args) {
         int testSize = 8;
 
-        Integer[] data = new Integer[testSize];
+        Integer[] data1 = new Integer[testSize];
         MaxHeap heap = new MaxHeap(testSize);
 
         MaxHeap newHeap = new MaxHeap(testSize);
         Integer[] data2 = new Integer[testSize];
 
-        for(int i = 0; i< data.length;i++){
+        for(int i = 0; i< data1.length;i++){
             int rm = (int) (Math.random()*((20-1)+1))+1;
             //int rm = (rand.nextInt(1000)%10);
-            //data[i] = rm;
+            //data1[i] = rm;
 
         }
-
-        data[0] = 19;
-        data[1] = 20;
-        data[2] = 18;
-        data[3] = 13;
-        data[4] = 12;
-        data[5] = 8;
-        data[6] = 12;
-        data[7] = 2;
+        data1 = new Integer[]{1, 20, 11, 13, 12, 2, 42, 23};
+        /*data1[0] = 1;
+        data1[1] = 20;
+        data1[2] = 11;
+        data1[3] = 13;
+        data1[4] = 12;
+        data1[5] = 8;
+        data1[6] = 12;
+        data1[7] = 2;*/
 
         for(int i = 0; i< data2.length;i++){
             int rm2 = (int) (Math.random()*((20-1)+1))+1;
             data2[i] = rm2;
         }
 
-        //System.out.println(Arrays.toString(data));
-        heap.MaxHeapLogN(data);
+        System.out.println("data1: " + Arrays.toString(data1));
+        heap.MaxHeapLogN(data1);
         System.out.println("result for MaxLogN:");
         heap.print();
-        int get = heap.get();
-        System.out.println("\n\nget(): "+get+"\n");
-        for (int i = 0; i<heap.size;i++){
-            heap.pop();
-            System.out.println("size of the heap:"+heap.size+"\n");
+
+        while (heap.get() != null) {
+            System.out.println("pop:" + heap.pop());
+            heap.print();
         }
-        System.out.println("after pop() everything:");
-        heap.print();
+
         System.out.println();
-        //System.out.println("\n result of MaxN:");
-        //newHeap.MaxHeapN(data2);
-        //newHeap.print();
+
+        System.out.println("data2: "+ Arrays.toString(data2));
+
+        newHeap.MaxHeapN(data2);
+        System.out.println("\nresult of MaxN:");
+        newHeap.print();
+
+        while (newHeap.get() != null) {
+            System.out.println("pop:" + newHeap.pop());
+            newHeap.print();
+        }
     }
 }
