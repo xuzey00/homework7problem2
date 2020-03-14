@@ -15,13 +15,13 @@ public class MaxHeap implements Heap {
     // to be implemented in O(nlogn)
     public void MaxHeapLogN(Integer[] inputArray) {
         // homework
-        System.out.println("Max heap build O(nlogn)");
+        //System.out.println("Max heap build O(nlogn)");
         if(inputArray.length == 0){
             return;
         }
         for (Integer datum : inputArray) {
             add(datum);
-            print();
+            //print();
             //System.out.println(Arrays.toString(data));
         }
     }
@@ -30,7 +30,7 @@ public class MaxHeap implements Heap {
     // to be implemented in O(n)
     public void MaxHeapN(Integer[] inputArray) {
         // homework
-        System.out.println("Max heap build O(n)");
+        //System.out.println("Max heap build O(n)");
         if(inputArray.length == 0){
             return;
         }
@@ -43,7 +43,7 @@ public class MaxHeap implements Heap {
         for (int i = size/2; i >= 0; i--)
         {
             heapifyDown(i);
-            System.out.println("data: " +Arrays.toString(data));
+            //System.out.println("data: " +Arrays.toString(data));
         }
 
     }
@@ -150,7 +150,7 @@ public class MaxHeap implements Heap {
     }
 
     //for test
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         int testSize = 8;
 
         Integer[] data1 = new Integer[testSize];
@@ -166,21 +166,24 @@ public class MaxHeap implements Heap {
 
         }
         data1 = new Integer[]{1, 20, 11, 13, 12, 2, 42, 23};
-        /*data1[0] = 1;
+        data1[0] = 1;
         data1[1] = 20;
         data1[2] = 11;
         data1[3] = 13;
         data1[4] = 12;
         data1[5] = 8;
         data1[6] = 12;
-        data1[7] = 2;*/
+        data1[7] = 2;
 
         for(int i = 0; i< data2.length;i++){
-            int rm2 = (int) (Math.random()*((20-1)+1))+1;
-            data2[i] = rm2;
+            //int rm2 = (int) (Math.random()*((20-1)+1))+1;
+            //data2[i] = rm2;
         }
 
-        System.out.println("data1: " + Arrays.toString(data1));
+       // data2=new Integer[]{1,20,11,13,12,2,42,23};
+
+
+        //System.out.println("data1: " + Arrays.toString(data1));
         heap.MaxHeapLogN(data1);
         System.out.println("result for MaxLogN:");
         heap.print();
@@ -202,5 +205,5 @@ public class MaxHeap implements Heap {
             System.out.println("pop:" + newHeap.pop());
             newHeap.print();
         }
-    }
+    }*/
 }
